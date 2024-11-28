@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'kafka'
+    static_configs:
+      - targets: ['kafka_exporter:9308']
+
+  - job_name: 'zookeeper'
+    static_configs:
+      - targets: ['zookeeper_exporter:9141']
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
