@@ -1,53 +1,53 @@
-services:
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: prometheus
-    ports:
-      - "9090:9090"
-    networks:
-      - kafka-network
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+# services:
+#   prometheus:
+#     image: prom/prometheus:latest
+#     container_name: prometheus
+#     ports:
+#       - "9090:9090"
+#     networks:
+#       - kafka-network
+#     volumes:
+#       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+#     command:
+#       - '--config.file=/etc/prometheus/prometheus.yml'
 
-  grafana:
-    image: grafana/grafana-oss:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    networks:
-      - kafka-network
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-    volumes:
-      - grafana_data:/var/lib/grafana
+#   grafana:
+#     image: grafana/grafana-oss:latest
+#     container_name: grafana
+#     ports:
+#       - "3000:3000"
+#     networks:
+#       - kafka-network
+#     environment:
+#       - GF_SECURITY_ADMIN_USER=admin
+#       - GF_SECURITY_ADMIN_PASSWORD=admin
+#     volumes:
+#       - grafana_data:/var/lib/grafana
 
-  kafka-exporter:
-    image: danielqsj/kafka-exporter:latest
-    container_name: kafka_exporter
-    command: ["--kafka.server=kafka1:9092", "--kafka.server=kafka2:9093", "--kafka.server=kafka3:9094"]
-    ports:
-      - "9308:9308"
-    networks:
-      - kafka-network
-    # environment:
-    #   - KAFKA_SERVER=kafka1:9092,kafka2:9093,kafka3:9094
+#   kafka-exporter:
+#     image: danielqsj/kafka-exporter:latest
+#     container_name: kafka_exporter
+#     command: ["--kafka.server=kafka1:9092", "--kafka.server=kafka2:9093", "--kafka.server=kafka3:9094"]
+#     ports:
+#       - "9308:9308"
+#     networks:
+#       - kafka-network
+#     # environment:
+#     #   - KAFKA_SERVER=kafka1:9092,kafka2:9093,kafka3:9094
 
-  zookeeper-exporter:
-    image: dabealu/zookeeper-exporter:latest
-    container_name: zookeeper_exporter
-    ports:
-      - "9141:9141"
-    networks:
-      - kafka-network
-    environment:
-      ZOOKEEPER_SERVERS: zookeeper:2181
+#   zookeeper-exporter:
+#     image: dabealu/zookeeper-exporter:latest
+#     container_name: zookeeper_exporter
+#     ports:
+#       - "9141:9141"
+#     networks:
+#       - kafka-network
+#     environment:
+#       ZOOKEEPER_SERVERS: zookeeper:2181
 
-volumes:
-  grafana_data:
+# volumes:
+#   grafana_data:
 
-networks:
-  kafka-network:
-    external: true
+# networks:
+#   kafka-network:
+#     external: true

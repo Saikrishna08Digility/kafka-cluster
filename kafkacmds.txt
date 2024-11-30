@@ -1,0 +1,7 @@
+docker exec -it kafka1 kafka-topics --create --topic sensor_data --bootstrap-server localhost:9092 --replication-factor 3 --partitions 3
+
+docker exec -it kafka1 kafka-topics --create --topic sensor_data_topic --bootstrap-server kafka1:9092 --replication-factor 3 --partitions 1
+
+docker exec -it kafka1 kafka-console-consumer --bootstrap-server localhost:9092 --topic sensor_data --from-beginning
+
+
